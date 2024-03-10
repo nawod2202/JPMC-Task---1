@@ -18,8 +18,23 @@ class ClientTest(unittest.TestCase):
 
 
   """ ------------ Add more unit tests ------------ """
+  datapoint = getDataPoint(quotes)
+  self.assertEqual(datapoint, (119.2, 120.48, (119.2 + 120.48) / 2))
 
+def test_getDataPoint_emptyQuotes(self):
+        quotes = []
+        datapoint = getDataPoint(quotes)
+        self.assertIsNone(datapoint)
 
+def test_getDataPoint_singleQuote(self):
+        quotes = [
+            {'top_ask': {'price': 121.2, 'size': 36}, 'timestamp': '2019-02-11 22:06:30.572453', 'top_bid': {'price': 120.48, 'size': 109}, 'id': '0.109974697771', 'stock': 'ABC'}
+        ]
+        datapoint = getDataPoint(quotes)
+        self.assertEqual(datapoint, (121.2, 120.48, (121.2 + 120.48) / 2))
 
 if __name__ == '__main__':
     unittest.main()
+
+
+
